@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Catálogo de Modelos</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <!-- Header se inyecta aquí -->
+    <script type="module">
+        import { renderHeader } from './js/components/HeaderComponent.js';
+        renderHeader();
+    </script>
+
+    <div id="modelos-container"></div>
+    <script type="module" src="js/main.js"></script>
+    <script type="module">
+        import { renderFooter } from './js/components/FooterComponent.js';
+        renderFooter();
+    </script>
+
+</body>
+
+</html>

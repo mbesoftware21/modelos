@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contáctanos</title>
+  <link rel="stylesheet" href="css/style.css" />
+<style>
+        /* Estilo del Módulo de Contacto */
+        .contact-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 4rem 1rem;
+            background-color: #f4f4f4;
+            min-height: 100vh;
+        }
+
+        .form-container {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 3rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .form-container h2 {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #f43f5e;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .form-container p {
+            font-size: 1.1rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #666;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #333;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            color: #333;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+        }
+
+        .form-group input[type="file"] {
+            padding: 0.5rem;
+        }
+
+        .btn-submit {
+            background-color: #f43f5e;
+            color: white;
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-submit:hover {
+            background-color: #e11d48;
+        }
+
+        .form-group button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+    </style></head>
+<body>
+
+<script type="module">
+  import { renderHeader } from './js/components/HeaderComponent.js';
+  renderHeader();
+</script>
+
+<div class="contact-container">
+  <div class="form-container">
+    <h2>¡Únete al Catálogo!</h2>
+    <p>¿Quieres formar parte de nuestro exclusivo catálogo? Completa el formulario y ¡te agregamos!</p>
+
+    <form id="inscripcion-form">
+      <div class="form-group">
+        <label for="nombre">Nombre Completo</label>
+        <input type="text" id="nombre" name="nombre" placeholder="Ingresa tu nombre completo" required />
+      </div>
+
+      <div class="form-group">
+        <label for="correo">Correo Electrónico</label>
+        <input type="email" id="correo" name="correo" placeholder="Ingresa tu correo" required />
+      </div>
+
+      <div class="form-group">
+        <label for="foto">Sube tu Foto</label>
+        <input type="file" id="foto" name="foto" accept="image/*" required />
+      </div>
+
+      <div class="form-group">
+        <label for="descripcion">Descripción Personal</label>
+        <textarea id="descripcion" name="descripcion" placeholder="Escribe una breve descripción sobre ti..." rows="5" required></textarea>
+      </div>
+
+      <div class="form-group">
+        <button type="submit" class="btn-submit">Enviar Inscripción</button>
+      </div>
+    </form>
+
+    <div id="respuesta"></div>
+  </div>
+</div>
+
+<script type="module">
+  import { renderFooter } from './js/components/FooterComponent.js';
+  renderFooter();
+</script>
+
+<script>
+  document.getElementById('inscripcion-form').addEventListener('submit', async function (event) {
+    event.preventDefault(); // Evita que el formulario recargue la página
+
+    const form = event.target;
+    const formData = new FormData(form);
+    const respuestaEl = document.getElementById('respuesta');
+
+    try {
+      const response = await fetch('http://localhost:3000/submit-form', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error('Error al enviar el formulario');
+      }
+
+      const result = await response.json();
+      respuestaEl.innerHTML = `<p style="color: green;">${result.message}</p>`;
+      form.reset(); // Limpia el formulario
+    } catch (error) {
+      console.error('Error:', error);
+      respuestaEl.innerHTML = `<p style="color: red;">Error al enviar el formulario. Intenta nuevamente.</p>`;
+    }
+  });
+</script>
+
+</body>
+</html>

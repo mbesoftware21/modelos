@@ -1,0 +1,526 @@
+/* Estilos Globales */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
+}
+
+body {
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+/* Header */
+.header {
+  background: linear-gradient(135deg, #f43f5e, #ff61a6);
+  color: white;
+  padding: 1.5rem 0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: background 0.3s ease-in-out;
+}
+
+.header:hover {
+  background: linear-gradient(135deg, #ff61a6, #f43f5e);
+}
+
+.header .container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo a {
+  color: white;
+  text-decoration: none;
+  font-size: 2rem;
+  font-weight: bold;
+  letter-spacing: 2px;
+  transition: transform 0.3s ease;
+}
+
+.logo a:hover {
+  transform: scale(1.1);
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav a {
+  color: white;
+  margin-left: 2rem;
+  text-decoration: none;
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+  transition: color 0.3s ease;
+}
+
+.nav a:hover {
+  color: #ff61a6;
+  text-decoration: underline;
+}
+
+/* Botón de Menú (hamburguesa) para móviles */
+.menu-btn {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.menu-btn div {
+  width: 25px;
+  height: 3px;
+  background-color: white;
+  border-radius: 10px;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+  .header .container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .logo a {
+    font-size: 1.8rem;
+  }
+
+  .nav {
+    width: 100%;
+    justify-content: flex-start;
+    margin-top: 1rem;
+    display: none; /* Menú oculto por defecto */
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .nav a {
+    font-size: 1.2rem;
+  }
+
+  .menu-btn {
+    display: flex;
+    cursor: pointer;
+  }
+
+  .nav.active {
+    display: flex; /* Mostrar menú cuando sea activado */
+  }
+}
+/* Header Fijo */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #f43f5e;
+  color: white;
+  padding: 1rem 0;
+  z-index: 1000; /* Asegura que el header esté por encima del resto del contenido */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Agrega sombra para un efecto sutil */
+}
+
+/* Container dentro del header */
+.header .container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Logo dentro del header */
+.logo a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+/* Estilo de la navegación en el header */
+.nav a {
+  color: white;
+  margin-left: 1.5rem;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.nav a:hover {
+  text-decoration: underline;
+}
+
+/* Espaciado del cuerpo para evitar que el contenido quede cubierto por el header fijo */
+body {
+  padding-top: 80px; /* Ajusta este valor para que el contenido no quede cubierto por el header */
+}
+
+/* Estilos Globales */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
+}
+
+body {
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+/* Catálogo */
+.catalogo {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 2rem 1rem;
+  margin-top: 2rem;
+  overflow: hidden;
+}
+
+.modelo-card {
+  position: relative;
+  width: 100%;
+  height: 500px; /* Altura fija para las tarjetas */
+  margin-bottom: 2rem;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  background-color: white;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+  opacity: 0.95;
+  cursor: pointer;
+}
+
+.modelo-card:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+  opacity: 1;
+}
+
+.modelo-card img {
+  width: 100%;
+  height: 60%;
+  object-fit: cover;
+  border-bottom: 3px solid #f43f5e; /* Línea de color sexy debajo de la imagen */
+}
+
+.modelo-card .info {
+  padding: 1.2rem;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  text-align: center;
+  transition: background 0.3s ease;
+}
+
+.modelo-card .info h3 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  font-family: 'Arial', sans-serif;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #fff;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.modelo-card .info p {
+  font-size: 1rem;
+  font-weight: 300;
+  margin-bottom: 1.5rem;
+}
+
+.modelo-card .info .btn {
+  background-color: #f43f5e;
+  color: white;
+  padding: 0.8rem 1.5rem;
+  border-radius: 30px;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 1rem;
+  letter-spacing: 2px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.modelo-card .info .btn:hover {
+  background-color: #e11d48;
+  transform: scale(1.05);
+}
+
+.modelo-card:hover .info {
+  background: rgba(0, 0, 0, 0.7); /* Fondo más oscuro cuando pasas el cursor */
+}
+
+/* Estilos para dispositivos móviles */
+@media (max-width: 768px) {
+  .modelo-card {
+    height: 350px; /* Aumentamos la altura de las tarjetas en móviles */
+  }
+
+  .modelo-card .info h3 {
+    font-size: 1.2rem;
+  }
+
+  .modelo-card .info p {
+    font-size: 0.9rem;
+  }
+
+  .modelo-card .info .btn {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+  }
+}
+/* Estilos Globales */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%; /* Asegura que el body ocupe toda la altura */
+}
+
+/* Estilos del Footer */
+.footer {
+  position: fixed; /* Fijar el footer en la parte inferior */
+  bottom: 0; /* Asegura que esté siempre al fondo */
+  left: 0;
+  width: 100%; /* Hace que el footer ocupe toda la anchura */
+  background-color: #1a1a1a; /* Fondo oscuro para el footer */
+  color: #fff;
+  padding: 2rem 0; /* Más padding para un footer más amplio */
+  border-top: 2px solid #f43f5e; /* Línea sexy arriba */
+  font-size: 1rem;
+  text-align: center;
+  z-index: 10; /* Asegura que el footer esté siempre por encima de otros elementos */
+}
+
+.footer .container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2rem; /* Separación entre los elementos del footer */
+}
+
+.footer .footer-logo {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #f43f5e; /* Color de la marca */
+  text-transform: uppercase;
+}
+
+.footer .footer-logo a {
+  text-decoration: none;
+  color: #f43f5e;
+  transition: color 0.3s ease;
+}
+
+.footer .footer-logo a:hover {
+  color: #fff; /* Cambio de color cuando el logo es hover */
+}
+
+.footer .footer-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.footer-nav a {
+  text-decoration: none;
+  color: #bbb;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  transition: color 0.3s ease;
+}
+
+.footer-nav a:hover {
+  color: #f43f5e; /* Color sexy cuando pasa el cursor */
+}
+
+.footer .footer-social {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.footer .footer-social a {
+  color: #bbb;
+  font-size: 1.5rem;
+  transition: color 0.3s ease;
+}
+
+.footer .footer-social a:hover {
+  color: #f43f5e; /* Efecto sexy en iconos de redes sociales */
+}
+
+/* Estilos para dispositivos móviles */
+@media (max-width: 768px) {
+  .footer .container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .footer-nav {
+    justify-content: center;
+  }
+
+  .footer .footer-social {
+    margin-top: 1.5rem;
+  }
+}
+/* ------ */
+/* Estilos Globales */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
+}
+
+body {
+  background-color: #f4f4f4;
+  color: #333;
+  font-size: 16px;
+}
+
+/* Perfil */
+.perfil {
+  max-width: 900px; /* Reducido para hacerlo más estrecho */
+  margin: 2rem auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem; /* Reducimos el espacio entre los elementos */
+  padding: 1.5rem; /* Menos padding para hacerlo más compacto */
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.perfil-fotos {
+  flex: 1;
+  position: relative;
+}
+
+.perfil-foto {
+  width: 100%;
+  height: 300px; /* Reducimos la altura de la imagen principal */
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.fotos-adicionales {
+  display: flex;
+  gap: 0.8rem; /* Menos espacio entre las fotos */
+  margin-top: 1rem;
+}
+
+.foto-adicional {
+  width: 70px; /* Reducimos el tamaño de las fotos adicionales */
+  height: 70px; /* Igual que el ancho, la altura es menor */
+  object-fit: cover;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.foto-adicional:hover {
+  transform: scale(1.1);
+}
+
+.perfil-info {
+  flex: 1;
+  padding: 1rem;
+}
+
+.perfil-info h2 {
+  margin-top: 0;
+  font-size: 1.8rem; /* Reducimos el tamaño del título */
+  font-weight: bold;
+  color: #f43f5e;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.perfil-info p {
+  margin: 0.8rem 0; /* Menos espacio entre los párrafos */
+}
+
+.perfil-info .descripcion {
+  font-size: 1rem; /* Reducido para que se vea más compacto */
+  color: #555;
+  line-height: 1.4;
+}
+
+.btn {
+  background-color: #f43f5e;
+  color: white;
+  padding: 0.8rem 1.5rem; /* Reducimos el padding del botón */
+  border-radius: 50px;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 0.9rem; /* Menor tamaño de fuente para hacerlo más pequeño */
+  display: inline-block;
+  margin-top: 1rem;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.btn:hover {
+  background-color: #e11d48;
+  transform: scale(1.05);
+}
+.perfil-foto {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 10px;
+  cursor: pointer; /* Hacemos que el puntero sea de mano cuando se pase por encima */
+  transition: transform 0.3s ease;
+}
+
+.perfil-foto:hover {
+  transform: scale(1.05); /* Un pequeño aumento de tamaño cuando pasas el cursor por encima */
+}
+
+.lightbox {
+  display: none; /* Ocultamos el lightbox por defecto */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8); /* Fondo oscuro */
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Lo ponemos encima de todos los elementos */
+  transition: opacity 0.3s ease;
+}
+
+.lightbox img {
+  max-width: 90%;
+  max-height: 80%;
+  border-radius: 15px;
+}
+
+.lightbox.active {
+  display: flex; /* Mostramos el lightbox cuando se active */
+}

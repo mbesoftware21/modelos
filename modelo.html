@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Perfil de modelo</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .perfil {
+      max-width: 960px;
+      margin: 2rem auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      padding: 1rem;
+    }
+
+    .perfil-foto {
+      width: 300px;
+      height: auto;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .perfil-info {
+      flex: 1;
+    }
+
+    .perfil-info h2 {
+      margin-top: 0;
+    }
+
+    .descripcion {
+      margin: 1rem 0;
+    }
+  </style>
+</head>
+
+<body>
+  <script type="module">
+    import { renderHeader } from './js/components/HeaderComponent.js';
+    renderHeader();
+  </script>
+
+  <div id="perfil-container"></div>
+
+  <script type="module" src="js/modelo.js"></script>
+  
+  <script type="module">
+    import { renderFooter } from './js/components/FooterComponent.js';
+    renderFooter();
+  </script>
+  
+</body>
+
+</html>

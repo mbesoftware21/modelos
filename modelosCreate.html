@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Crear Modelo</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* Estilos generales */
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .form-container {
+      background-color: white;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      padding: 2rem;
+      border-radius: 8px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .form-container h2 {
+      text-align: center;
+      font-size: 2rem;
+      color: #f43f5e;
+      margin-bottom: 1.5rem;
+    }
+
+    .form-container p {
+      text-align: center;
+      font-size: 1rem;
+      color: #555;
+      margin-bottom: 2rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      font-size: 1rem;
+      color: #333;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.8rem;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 1rem;
+      color: #333;
+      background-color: #f9f9f9;
+    }
+
+    .form-group textarea {
+      resize: vertical;
+    }
+
+    .form-group input[type="file"] {
+      padding: 0.5rem;
+    }
+
+    .form-group button {
+      width: 100%;
+      padding: 1rem 0;
+      background-color: #f43f5e;
+      color: white;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .form-group button:hover {
+      background-color: #e11d48;
+    }
+
+    #respuesta {
+      margin-top: 1rem;
+      text-align: center;
+    }
+
+    .error-message {
+      color: red;
+    }
+
+    .success-message {
+      color: green;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="form-container">
+      <h2>Crear Modelo</h2>
+      <p>Por favor completa los datos para crear un nuevo modelo. Asegúrate de incluir una foto principal y una galería de imágenes.</p>
+
+      <form id="crear-modelo-form" enctype="multipart/form-data">
+        <!-- Nombre -->
+        <div class="form-group">
+          <label for="nombre">Nombre Completo</label>
+          <input type="text" id="nombre" name="nombre" placeholder="Ingresa el nombre completo de la modelo" required />
+        </div>
+
+        <!-- Ciudad -->
+        <div class="form-group">
+          <label for="ciudad">Ciudad</label>
+          <input type="text" id="ciudad" name="ciudad" placeholder="Ciudad de la modelo" required />
+        </div>
+
+        <!-- Categoría -->
+        <div class="form-group">
+          <label for="categoria">Categoría</label>
+          <input type="text" id="categoria" name="categoria" placeholder="Ejemplo: Escort, Webcam" required />
+        </div>
+
+        <!-- Edad -->
+        <div class="form-group">
+          <label for="edad">Edad</label>
+          <input type="number" id="edad" name="edad" placeholder="Edad de la modelo" required />
+        </div>
+
+        <!-- Descripción -->
+        <div class="form-group">
+          <label for="descripcion">Descripción Personal</label>
+          <textarea id="descripcion" name="descripcion" placeholder="Escribe una breve descripción..." rows="5" required></textarea>
+        </div>
+
+        <!-- Galería de fotos (máximo 10) -->
+        <div class="form-group">
+          <label for="fotos">Sube Foto Principal y Galería (máximo 10 fotos)</label>
+          <input type="file" id="fotos" name="fotos" accept="image/*" multiple required />
+          <small>(Se suben juntas; la primera será la foto principal)</small>
+        </div>
+
+        <!-- WhatsApp -->
+        <div class="form-group">
+          <label for="whatsapp">Número de WhatsApp</label>
+          <input type="text" id="whatsapp" name="whatsapp" placeholder="Número de WhatsApp" required />
+        </div>
+
+        <!-- Enviar -->
+        <div class="form-group">
+          <button type="submit" class="btn-submit">Crear Modelo</button>
+        </div>
+      </form>
+
+      <div id="respuesta"></div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('crear-modelo-form').addEventListener('submit', async function (event) {
+      event.preventDefault(); // Evita la recarga de página
+
+      const form = event.target;
+      const formData = new FormData(form);
+      const respuestaEl = document.getElementById('respuesta');
+
+      // Comprobamos que haya al menos una foto
+      const fotos = formData.getAll('fotos');
+      if (fotos.length === 0) {
+        respuestaEl.innerHTML = `<p class="error-message">Debes subir al menos una foto para la galería.</p>`;
+        return;
+      }
+
+      try {
+        const response = await fetch('http://localhost:3000/modelos', {
+          method: 'POST',
+          body: formData,
+        });
+
+        if (!response.ok) {
+          throw new Error('Error al crear el modelo');
+        }
+
+        const result = await response.json();
+        respuestaEl.innerHTML = `<p class="success-message">${result.message}</p>`;
+        form.reset(); // Limpiar el formulario
+      } catch (error) {
+        console.error('Error:', error);
+        respuestaEl.innerHTML = `<p class="error-message">Error al crear el modelo. Intenta nuevamente.</p>`;
+      }
+    });
+  </script>
+
+</body>
+</html>
