@@ -147,7 +147,7 @@
     const respuestaEl = document.getElementById('respuesta');
 
     try {
-      const response = await fetch('http://localhost:3000/submit-form', {
+      const response = await fetch('https://modelos-server.onrender.com/submit-form', {
         method: 'POST',
         body: formData,
       });

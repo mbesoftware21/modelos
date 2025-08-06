@@ -1,6 +1,6 @@
 export async function obtenerModelos() {
   try {
-    const response = await fetch("http://localhost:3000/modelos");
+    const response = await fetch("https://modelos-server.onrender.com/modelos");
     if (!response.ok) throw new Error("Error al obtener modelos");
 
     const data = await response.json();

@@ -14,15 +14,16 @@ export function PerfilComponent(modelo) {
         <p><strong>Categoría:</strong> ${modelo.categoria}</p>
         <p><strong>Edad:</strong> ${modelo.edad || 'No disponible'} años</p>
         <p class="descripcion">${modelo.descripcion || 'Sin descripción disponible.'}</p>
-        <a href="${modelo.whatsapp}" class="btn" target="_blank">Contactar vía WhatsApp</a>
-      </div>
+        <a href="https://wa.me/57${modelo.whatsapp}" class="btn" target="_blank">Contactar vía WhatsApp</a>
+
+        </div>
     </section>
   `;
 
   // Luego, agregamos el lightbox para las fotos
   const lightbox = document.createElement('div');
   lightbox.classList.add('lightbox');
-  
+
   const lightboxImg = document.createElement('img');
   lightbox.appendChild(lightboxImg);
   document.body.appendChild(lightbox);
